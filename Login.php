@@ -1,5 +1,5 @@
 <?php
-    $con =mysqli_connect("localhost:3306","multiple","Abcd23@#","multiple");
+    $con =mysqli_connect("localhost","eun","Abcd23@#","multiple");
 
     $id=$_POST["id"];
     $pw=$_POST["pw"];
@@ -19,8 +19,6 @@
       $response["id"]=$id;
       $response["pw"]=$pw;
       $response["name"]=$name;
-
     }
     echo json_encode($response);
-
-    ?>
+?>
