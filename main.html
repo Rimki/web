@@ -1,0 +1,28 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>관리 페이지</title>
+</head>
+<body>
+
+<?php
+$conn = mysqli_connect("localhost","eun","Abcd23@#","multiple");
+if(mysqli_connect_errno($conn)) {
+    echo "불러올 수 없습니다.";
+}
+
+mysqli_set_charset($conn,'utf8');
+
+$select_query = "SELECT * FROM soongsil_delivery";
+$result_set = mysqli_query($conn, $select_query);
+
+while($row = mysqli_fetch_array($result_set)){
+    print_r($row["address"]);
+    echo '<br>';
+}
+
+mysqli_close($conn);
+?>
+
+</body>
+</html>
