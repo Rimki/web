@@ -32,8 +32,8 @@
                 <input type="submit">
             </form>
         </div>
-
         <div id="div_list">
+		<br>
             <?php
                 $conn = mysqli_connect("localhost","eun","Abcd23@#","multiple");
                 if(mysqli_connect_errno($conn)) {
@@ -41,15 +41,33 @@
                 }
 
                 mysqli_set_charset($conn,'utf8');
+				
+				$testing = array();
 
+				$candi_query = "select * from soongsil";
+				$result_set = mysqli_query($conn, $candi_query);
+				
+				while($row = mysqli_fetch_array($result_set)){
+					print_r($row["name"]);
+					array_push($testing,$row["name"]);
+				}
+				echo '<br><br>';				
                 $select_query = "SELECT * FROM soongsil_delivery";
                 $result_set = mysqli_query($conn, $select_query);
-
+				
                 while($row = mysqli_fetch_array($result_set)){
                     print_r($row["address"]);
-                    echo '<br>';
-                }
-
+				echo "<select name='seltest'><option value='op0' selected> </option>";
+				$cnt = 0;
+				while($cnt != count($testing)) {
+					echo "<option value='op$cnt'>$testing[$cnt]</option>";
+					$cnt++;
+				}
+				echo "</select>";
+			?>
+			<br>
+			<?php
+				}
                 mysqli_close($conn);
             ?>
         </div>
