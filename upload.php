@@ -9,8 +9,16 @@ shell_exec("cd /var/www/html/web");
 $command = "python upload.py -f ".$filename;
 exec($command,$output,$return);
 
-echo "Output : ";
-print_r($output);
+for($i = 0; $i < count($output); $i++)
+{
+	print($output[$i]);
+	print('<BR>');
+}
+
+print($i."개 추가완료");
+print('<BR>');
+
+echo "<a href='main.html'>확인</a>";
 
 shell_exec("rm ".$filename);
 ?>
