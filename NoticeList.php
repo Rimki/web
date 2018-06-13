@@ -3,7 +3,7 @@
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
 
   $id=$_GET["id"];
-  $result = mysqli_query($con,"SELECT address,item FROM soongil_".$id);
+  $result = mysqli_query($con,"SELECT address,item FROM soongil_".$id."WHERE address=? AND item=?");
   $response = array();
 
   while($row = mysqli_fetch_array($result)){
