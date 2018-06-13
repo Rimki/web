@@ -4,7 +4,7 @@
   mysqli_set_charset($con,"utf8");
   //$id=$_GET["id"];
 
-  $result = mysqli_query($con,"SELECT address,item FROM soongsil_test WHERE address=? AND item=?);
+  $result = mysqli_query($con,"SELECT address,item FROM soongsil_test);
   $response = array();
 
   while($row = mysqli_fetch_array($result)){
