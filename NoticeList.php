@@ -2,7 +2,8 @@
   header("Content-Type: text/html;charset=UTF-8");
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
   mysqli_set_charset($con,"utf8");
-  $id=$_GET["id"];
+  //$id=$_GET["id"];
+  $id="test";
   $result = mysqli_query($con,"SELECT address,item FROM soongil_".$id);
   $response = array();
 
