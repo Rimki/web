@@ -10,7 +10,7 @@
   while($row = mysqli_fetch_array($result)){
       array_push($response,array("address"->$row[0],"item"->$row[1]));
   }
-  print_r("$result");
+  print($result);
   echo json_encode(array("response"->$response),JSON_UNESCAPED_UNICODE);
   mysqli_close($con);
 
