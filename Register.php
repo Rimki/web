@@ -16,9 +16,6 @@
     mysqli_stmt_bind_param($statement,"ssss",$id,$name,$position,$pw);
     mysqli_stmt_execute($statement);
 	
-	$create_query = "CREATE TABLE soongsil_".$id."(aid INT,primary key(aid))default character set utf8;";
-	mysqli_query($con,$create_query);
-
     $response=array();
     $response["success"]=true;
 

@@ -1,13 +1,13 @@
 import argparse
 import openpyxl
-from operator import eq
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f","--file",required=True)
 args = parser.parse_args()
 
+
 wb = openpyxl.load_workbook(args.file,data_only=True)
-ws = wb.get_active_sheet()
+ws = wb.active
 
 r=2
 
