@@ -1,5 +1,5 @@
 <?php
-//  header("Content-Type: text/html;charset=UTF-8");
+  header("Content-Type: text/html;charset=UTF-8");
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
   mysqli_set_charset($con,"utf8");
   //$id=$_GET["id"];
@@ -10,8 +10,7 @@
   while($row = mysqli_fetch_array($result)){
       array_push($response,array("address"->$row[0],"item"->$row[1]));
   }
-
-  echo json_encode(array("response"->$response));
+  echo json_encode(array("response"->$response),JSON_UNESCAPED_UNICODE);
   mysqli_close($con);
 
 ?>
