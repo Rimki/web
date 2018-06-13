@@ -2,15 +2,15 @@
 $source = $_FILES['upfile']['tmp_name'];
 $dest = "./".basename($_FILES['upfile']['name']);
 move_uploaded_file($source,$dest);
+$filename = basename($_FILES['upfile']['name']);
 
 shell_exec("cd /var/www/html/web");
 
-$command = "python upload.py -f list.xlms";
-exec(command,$out,$error);
+$command = "python upload.py -f ".$filename;
+exec($command,$output,$return);
 
-echo $command;
-echo '<BR>';
-echo $error;
-echo'<BR>';
-echo $out[1];
+echo "Output : ";
+print_r($output);
+
+shell_exec("rm ".$filename);
 ?>

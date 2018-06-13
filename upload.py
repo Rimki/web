@@ -1,20 +1,20 @@
 import argparse
-import openpyxl
+import xlrd
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f","--file",required=True)
 args = parser.parse_args()
 
+wb = xlrd.open_workbook(args.file)
+ws = wb.sheet_by_index(0)
 
-wb = openpyxl.load_workbook(args.file,data_only=True)
-ws = wb.active
+ncol = ws.ncols
+nrow = ws.nrows
 
-r=2
+for i in range(1,nrow):
+	for j in range(0,ncol):
+		try:
+			print(ws.cell(i,j).value.encode('utf-8'))
+		except:
+			print(int(ws.cell(i,j).value))
 
-while 1:
-	if ws.cell(column=1,row=r).value is None:
-		break
-	else:
-		for c in range(1,5):
-			print(ws.cell(column=c,row=r).value)
-		r=r+1
