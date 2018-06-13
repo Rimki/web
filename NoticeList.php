@@ -1,7 +1,8 @@
 <?php
+  header("Content-Type: text/html;charset=UTF-8");
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
 
-  $id=$_POST["id"];
+  $id=$_GET["id"];
   $result = mysqli_query($con,"SELECT address,item FROM soongil_".$id);
   $response = array();
 
