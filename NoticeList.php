@@ -5,7 +5,7 @@
   //$id=$_GET["id"];
 
   $result = mysqli_query($con,"SELECT address,item FROM soongsil_test;");
-  $response = array();
+  $response = array()
 
   while($row = mysqli_fetch_array($result)){
       array_push($response,array("address"->$row[0],"item"->$row[1]));
