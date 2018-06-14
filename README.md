@@ -54,3 +54,13 @@ Login.php : 안드로이드에서 로그인 요청시 처리
 
 
 NoticeList.php : 주소지 리스트를 출력하기 위한 처리
+
+
+2. 공지사항
+
+
+- 웹 서비스는 mulipledestination.online/web 으로 접속할 수 있음
+
+- 엑셀 파일은 특별한 형식을 따라 작성해야 들어감
+
+- dbid : eun@local pw : Abcd23@# schema : multiple
