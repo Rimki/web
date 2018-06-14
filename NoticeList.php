@@ -1,7 +1,7 @@
 <?php
 //  header("Content-Type: text/html;charset=UTF-8");
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
-//  mysqli_set_charset($con,"utf8");
+  mysqli_set_charset($con,"ANCI");
   //$id=$_GET["id"];
 
   $result = mysqli_query($con,"SELECT address,item FROM soongsil_test;");
