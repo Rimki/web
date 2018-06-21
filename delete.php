@@ -1,12 +1,14 @@
 <?php
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
   mysqli_set_charset($con,"utf-8");
-  $aid=$_POST["aid"];
+  $a=$_POST['aid'];
+  $aid=explode(',',$a);
+	
 
-  for($i = 0; $i < count(aid); $i++)
+  for($i = 0; $i < count($aid); $i++)
   {
-	  mysqli_prepare($con,"DELETE FROM soongsil_delivery WHERE aid=?");
-	  mysqli_stmt_bind_param($statement,"s",$aid[i]);
+	  $statement = mysqli_prepare($con,"DELETE FROM soongsil_delivery WHERE aid=?");
+	  mysqli_stmt_bind_param($statement,"s",$aid[$i]);
 	  mysqli_stmt_execute($statement);
   }
 

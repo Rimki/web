@@ -77,34 +77,30 @@
 
 		function remove_button(bt) {
 			var rm = document.getElementsByName("check");
-			var form = document.getElementsByName("test");
+			var aid = new Array();
+			var count = 0;
 
-			var count=0;
-			for( var i=0; i < rm.length; i++)
-			{
-				if(rm[i].checked) count++;
-			}
-
-			var aid = new Array(count);
-			
-			count=0;
 			if ( bt.click ) {
 				for ( var i=0; i < rm.length; i++) {
-					if ( rm[i].checked ) { // array 로 만들어서 넘기기?
-						aid[count] = i;
+					if ( rm[i].checked ) {
+						aid.push(rm[i].value);
 						count++;
 					}
 				}
 			}
-			alert(count);
-			alert(aid[0]);
-			alert(aid[1]);
-			alert(aid[2]);
-			form.arrMenuValue.value = aid;
-			form.arrMenuValue.value;
-			alert("dd");
-			form.method = "POST";
-			form.action = "delete.php";
+			alert(aid);
+			var form = document.createElement("form");
+			form.setAttribute("charset","UTF-8");
+            form.setAttribute("method","POST");
+			form.setAttribute("action","delete.php");
+		
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type","hidden");
+			hiddenField.setAttribute("name","aid");
+			hiddenField.setAttribute("value",aid);
+			form.appendChild(hiddenField);
+
+			document.body.appendChild(form);
 			form.submit();
 		}
 
@@ -166,7 +162,7 @@
 				</tbody>
 				
 				<tfoot>
-					<tr><form id="form1" name="test"><td><input type="button" value="삭제" onclick="remove_button(this);"></td></form>
+					<tr><td><input type="button" value="삭제" onclick="remove_button(this);"></td>
 						<form action="insert.php" method="post">
 						<td colspan='2'><input type="text" placeholder="Address" name="add">
 							<input type="text" placeholder="Item" name="item"><br>
