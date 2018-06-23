@@ -88,7 +88,6 @@
 					}
 				}
 			}
-			alert(aid);
 			var form = document.createElement("form");
 			form.setAttribute("charset","UTF-8");
             form.setAttribute("method","POST");
@@ -103,6 +102,45 @@
 			document.body.appendChild(form);
 			form.submit();
 		}
+		
+		function modify_button(bt){
+			var md_t = document.getElementsByName("modi_text")[bt.id-1];
+			var md_b = document.getElementsByName("modi_bt")[bt.id-1];
+			md_t.setAttribute('type','text');
+			md_b.setAttribute('value','변경');
+			md_b.setAttribute('onclick',"add_button(this);");
+		}
+
+		function add_button(bt){
+			var addr = document.getElementsByName("modi_text")[bt.id-1].value;
+			
+			var form = document.createElement("form");
+            form.setAttribute("charset","UTF-8");
+            form.setAttribute("method","POST");
+            form.setAttribute("action","modify.php");
+
+			var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type","hidden");
+            hiddenField.setAttribute("name","addr");
+            hiddenField.setAttribute("value",addr);
+            form.appendChild(hiddenField);
+
+            var hiddenField2 = document.createElement("input");
+            hiddenField2.setAttribute("type","hidden");
+            hiddenField2.setAttribute("name","id");
+            hiddenField2.setAttribute("value",bt.id);
+            form.appendChild(hiddenField2);
+
+            document.body.appendChild(form);
+            form.submit();
+			
+		}
+		
+		function allocate(bt){
+			var id_op = document.getElementByName("sel");
+			alert(id_op);
+		}
+
 
 	</script>
 
@@ -145,13 +183,13 @@
                             echo "<tr>
 								<td><input type='checkbox' name='check' value=$aid></td>
 								<td>$aid</td>
-								<td>$address</td>
-								<td><input type='button' value='수정'></td><td>";
-								// 후보 select
-						        echo "<select name='seltest'><option value='op0' selected> </option>";
+								<td><input type='hidden' name='modi_text' id=$aid placeholder='$address'>
+									<p>$address</p></td>
+								<td><input type='button' name='modi_bt' id=$aid value='수정' onclick='modify_button(this);'></td>
+								<td><select name='sel'><option value='op0' selected> </option>";
 								$cnt = 0;
 					            while($cnt != count($candi)) {
-									echo "<option value='op$cnt'>$candi[$cnt]</option>";
+									echo "<option name='sel' value='$cnt'>$candi[$cnt]</option>";
 									$cnt++;
 								}
 								$cnt_row++;
@@ -169,9 +207,8 @@
 							<input type="text" placeholder="Phone" name="phone">
 							<input type="text" placeholder="Name" name="cname">
 							<input type="text" placeholder="Pay" name="pay"></td>
-						<td><input type="submit" value="추가"> </td>
-						</form>
-						<td><input type="button" value="분배완료"</td></tr>
+						<td><input type="submit" value="추가"> </td></form>
+						<td><input type="button" value="분배완료" onclick="allocate(this);"</td></tr>
                 </tfoot>
             </table>
         </div>
