@@ -1,16 +1,16 @@
 <?php
-//  header("Content-Type: text/html;charset=UTF-8");
+  header("Content-Type: text/html;charset=UTF-8");
   $con  = mysqli_connect("localhost","eun","Abcd23@#","multiple");
-  mysqli_set_charset($con,"utf-8");
-  //$id=$_GET["id"];
+  mysqli_set_charset($con,'utf8');
+  $id=$_GET["id"];
 
-  $result = mysqli_query($con,"SELECT address,item FROM soongsil_test;");
-  $response = array()
+  $result = mysqli_query($con,"SELECT address,item FROM soongsil_".$id.";");
+  $response = array();
 
   while($row = mysqli_fetch_array($result)){
-      array_push($response,array("address"->$row[0],"item"->$row[1]));
+      array_push($response,array("address"=>$row[0],"item"=>$row[1]));
   }
-  echo json_encode(array("response"->$response),JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE);
+  echo json_encode(array("response"=>$response),JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE);
   mysqli_close($con);
 
 ?>
