@@ -136,12 +136,37 @@
 			
 		}
 		
-		function allocate(bt){
-			var id_op = document.getElementByName("sel");
-			alert(id_op);
+
+		var sel_id_list = new Array();
+		var sel_val_list = new Array();
+		function is_change(sel) {
+			sel_id_list.push(sel.id);
+			sel_val_list.push(sel.value);
 		}
 
+		function allocation() {
+			var form = document.createElement("form");
+			form.setAttribute("charset","UTF-8");			
+			form.setAttribute("method","post");			
+			form.setAttribute("action","allocation.php");
 
+			var sel_id = document.createElement("input");
+			sel_id.setAttribute("type","hidden");			
+			sel_id.setAttribute("name","sel_id");			
+			sel_id.setAttribute("value",sel_id_list);
+			form.appendChild(sel_id);
+
+			var sel_value = document.createElement("input");
+			sel_value.setAttribute("type","hidden");			
+			sel_value.setAttribute("name","sel_val");			
+			sel_value.setAttribute("value",sel_val_list);
+			form.appendChild(sel_value);
+
+			document.body.appendChild(form);
+			form.submit();			
+
+		}
+		
 	</script>
 
     <body>
@@ -159,13 +184,15 @@
                 }
                 mysqli_set_charset($conn,'utf8'); // 한글 문자 패치
 				
-				$candi = array(); // 기사 이름 배열 생성
-
+				$candi_name = array(); // 기사 이름 배열 생성
+				$candi_mail = array();			
+	
 				$candi_query = "select * from soongsil where position='택배기사'";
 				$result_set = mysqli_query($conn, $candi_query);
 				
 				while($row = mysqli_fetch_array($result_set)){
-					array_push($candi,$row["name"]);
+					array_push($candi_name,$row["name"]);
+					array_push($candi_mail,$row["id"]);
 				}
             ?>
             <table>
@@ -186,10 +213,11 @@
 								<td><input type='hidden' name='modi_text' id=$aid placeholder='$address'>
 									<p>$address</p></td>
 								<td><input type='button' name='modi_bt' id=$aid value='수정' onclick='modify_button(this);'></td>
-								<td><select name='sel'><option value='op0' selected> </option>";
+								<td><select name='sel' id='$aid' onchange='is_change(this);'>
+									<option value='0' selected></option>";
 								$cnt = 0;
-					            while($cnt != count($candi)) {
-									echo "<option name='sel' value='$cnt'>$candi[$cnt]</option>";
+					            while($cnt != count($candi_name)) {
+									echo "<option value='$candi_mail[$cnt]'>$candi_name[$cnt], $candi_mail[$cnt]</option>";
 									$cnt++;
 								}
 								$cnt_row++;
@@ -208,7 +236,7 @@
 							<input type="text" placeholder="Name" name="cname">
 							<input type="text" placeholder="Pay" name="pay"></td>
 						<td><input type="submit" value="추가"> </td></form>
-						<td><input type="button" value="분배완료" onclick="allocate(this);"</td></tr>
+						<td><input type="button" value="분배완료" onclick="allocation();"></td></tr>
                 </tfoot>
             </table>
         </div>
