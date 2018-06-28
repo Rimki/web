@@ -197,7 +197,7 @@
             ?>
             <table>
                 <thead>
-                    <tr><td><input type="checkbox" onchange="all_check(this);"></td><td colspan='3' >주소</td><td>분배</td></tr>
+                    <tr><td><input type="checkbox" onchange="all_check(this);"></td><td colspan='3' >주소</td><td colspan='2' >분배</td></tr>
                 </thead>
                 <tbody>
                     <?php
@@ -207,12 +207,14 @@
                         while($row = mysqli_fetch_array($result_set)){
 							$address = $row["address"];
 							$aid = $row["aid"];
+							$alloc = $row["allocate"];
                             echo "<tr>
 								<td><input type='checkbox' name='check' value=$aid></td>
 								<td>$aid</td>
 								<td><input type='hidden' name='modi_text' id=$aid placeholder='$address'>
 									<p>$address</p></td>
 								<td><input type='button' name='modi_bt' id=$aid value='수정' onclick='modify_button(this);'></td>
+								<td>$alloc</td>
 								<td><select name='sel' id='$aid' onchange='is_change(this);'>
 									<option value='0' selected></option>";
 								$cnt = 0;
@@ -236,7 +238,7 @@
 							<input type="text" placeholder="Name" name="cname">
 							<input type="text" placeholder="Pay" name="pay"></td>
 						<td><input type="submit" value="추가"> </td></form>
-						<td><input type="button" value="분배완료" onclick="allocation();"></td></tr>
+						<td colspan='2'><input type="button" value="분배완료" onclick="allocation();"></td></tr>
                 </tfoot>
             </table>
         </div>
